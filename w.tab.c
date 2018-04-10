@@ -120,6 +120,11 @@ void yyerror( char *s );
 
 
 
+
+
+
+
+
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -163,7 +168,7 @@ typedef struct YYLTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 167 "w.tab.c"
+#line 172 "w.tab.c"
 
 #ifdef short
 # undef short
@@ -380,7 +385,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   57
+#define YYLAST   48
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  22
@@ -389,7 +394,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  28
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  54
+#define YYNSTATES  50
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -436,8 +441,8 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     5,     8,    13,    16,    18,    21,    25,
-      29,    31,    33,    36,    38,    42,    46,    50,    55,    58,
-      62,    66,    68,    72,    76,    78,    80,    82,    84
+      29,    31,    33,    36,    38,    41,    44,    47,    51,    54,
+      58,    62,    64,    68,    72,    74,    76,    78,    80
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
@@ -447,19 +452,19 @@ static const yytype_int8 yyrhs[] =
       29,     4,    -1,    25,    26,    -1,    26,    -1,    12,    27,
       -1,    14,    12,    27,    -1,    28,    12,    15,    -1,     5,
       -1,     6,    -1,    29,    30,    -1,    30,    -1,     8,    11,
-      15,    -1,     8,    12,    15,    -1,     9,    12,    15,    -1,
-      12,    10,    31,    15,    -1,     1,    15,    -1,    31,    16,
-      32,    -1,    31,    17,    32,    -1,    32,    -1,    32,    18,
-      33,    -1,    32,    19,    33,    -1,    33,    -1,    12,    -1,
-       6,    -1,    13,    -1,    20,    31,    21,    -1
+      -1,     8,    12,    -1,     9,    12,    -1,    12,    10,    31,
+      -1,     1,    15,    -1,    31,    16,    32,    -1,    31,    17,
+      32,    -1,    32,    -1,    32,    18,    33,    -1,    32,    19,
+      33,    -1,    33,    -1,    12,    -1,     6,    -1,    13,    -1,
+      20,    31,    21,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    44,    45,    51,    52,    55,    65,    74,
-      79,    79,    84,    85,    88,    89,    97,   105,   124,   131,
-     147,   162,   165,   182,   198,   200,   214,   215,   216
+       0,    50,    50,    55,    56,    60,    61,    64,    79,    93,
+      98,    98,   105,   106,   109,   118,   127,   138,   155,   162,
+     178,   193,   196,   213,   229,   231,   245,   246,   247
 };
 #endif
 
@@ -499,7 +504,7 @@ static const yytype_uint8 yyr1[] =
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     1,     2,     4,     2,     1,     2,     3,     3,
-       1,     1,     2,     1,     3,     3,     3,     4,     2,     3,
+       1,     1,     2,     1,     2,     2,     2,     3,     2,     3,
        3,     1,     3,     3,     1,     1,     1,     1,     3
 };
 
@@ -510,37 +515,35 @@ static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     2,     3,     0,     0,     6,     1,    10,
       11,     0,     7,     0,     0,     0,     0,     0,     5,     0,
-      13,     0,     0,    18,     0,     0,     0,     0,     4,     0,
-      12,     8,     9,    14,    15,    16,    26,    25,    27,     0,
-       0,    21,    24,     0,    17,     0,     0,     0,     0,    28,
-      19,    20,    22,    23
+      13,     0,     0,    18,    14,    15,    16,     0,     4,     0,
+      12,     8,     9,    26,    25,    27,     0,    17,    21,    24,
+       0,     0,     0,     0,     0,    28,    19,    20,    22,    23
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     6,     7,    12,    13,    19,    20,    40,
-      41,    42
+      -1,     2,     3,     6,     7,    12,    13,    19,    20,    37,
+      38,    39
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -15
+#define YYPACT_NINF -9
 static const yytype_int8 yypact[] =
 {
-      16,     1,    37,   -15,   -15,    -3,     9,   -15,   -15,   -15,
-     -15,    26,   -15,    27,    25,    14,    29,    10,   -15,     0,
-     -15,    -3,    28,   -15,    30,    31,    32,    -6,   -15,    34,
-     -15,   -15,   -15,   -15,   -15,   -15,   -15,   -15,   -15,    -6,
-      13,    15,   -15,     6,   -15,    -6,    -6,    -6,    -6,   -15,
-      15,    15,   -15,   -15
+      16,     1,    30,    -9,    -9,    -3,     9,    -9,    -9,    -9,
+      -9,    23,    -9,    26,    24,    14,    28,    10,    -9,     0,
+      -9,    -3,    27,    -9,    -9,    -9,    -9,    -6,    -9,    31,
+      -9,    -9,    -9,    -9,    -9,    -9,    -6,    12,    13,    -9,
+       6,    -6,    -6,    -6,    -6,    -9,    13,    13,    -9,    -9
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -15,   -15,   -15,   -15,    36,    33,   -15,   -15,    38,    11,
-     -14,   -12
+      -9,    -9,    -9,    -9,    37,    25,    -9,    -9,    29,     8,
+      -8,    -7
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -550,22 +553,20 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      36,    14,     9,    10,    28,     4,    37,    38,    15,    16,
-      14,    11,    29,     5,    39,     9,    10,    15,    16,     1,
-      27,    17,    45,    46,    11,    24,    25,    49,    44,    45,
-      46,    50,    51,    47,    48,    52,    53,     8,    21,    22,
-      23,    26,    18,    32,    27,    33,    34,    35,     0,     0,
-      43,     0,     0,     0,    31,     0,     0,    30
+      33,    14,     9,    10,    28,     4,    34,    35,    15,    16,
+      14,    11,    29,     5,    36,     9,    10,    15,    16,     1,
+      27,    17,    41,    42,    11,    24,    25,    45,    41,    42,
+       8,    43,    44,    46,    47,    21,    48,    49,    22,    23,
+      26,    27,    32,    18,    40,     0,    31,     0,    30
 };
 
 static const yytype_int8 yycheck[] =
 {
        6,     1,     5,     6,     4,     4,    12,    13,     8,     9,
        1,    14,    12,    12,    20,     5,     6,     8,     9,     3,
-      10,    12,    16,    17,    14,    11,    12,    21,    15,    16,
-      17,    45,    46,    18,    19,    47,    48,     0,    12,    12,
-      15,    12,     6,    15,    10,    15,    15,    15,    -1,    -1,
-      39,    -1,    -1,    -1,    21,    -1,    -1,    19
+      10,    12,    16,    17,    14,    11,    12,    21,    16,    17,
+       0,    18,    19,    41,    42,    12,    43,    44,    12,    15,
+      12,    10,    15,     6,    36,    -1,    21,    -1,    19
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -575,9 +576,8 @@ static const yytype_uint8 yystos[] =
        0,     3,    23,    24,     4,    12,    25,    26,     0,     5,
        6,    14,    27,    28,     1,     8,     9,    12,    26,    29,
       30,    12,    12,    15,    11,    12,    12,    10,     4,    12,
-      30,    27,    15,    15,    15,    15,     6,    12,    13,    20,
-      31,    32,    33,    31,    15,    16,    17,    18,    19,    21,
-      32,    32,    33,    33
+      30,    27,    15,     6,    12,    13,    20,    31,    32,    33,
+      31,    16,    17,    18,    19,    21,    32,    32,    33,    33
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1414,36 +1414,42 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 40 "w.y"
+#line 50 "w.y"
     {printf("#include <stdio.h>\n");
           printf("#include <string.h>\n");
+          printf("#define MAX 100\n");
           ;}
     break;
 
   case 4:
-#line 45 "w.y"
+#line 56 "w.y"
     {printf("int main(){\n");;}
     break;
 
   case 5:
-#line 51 "w.y"
+#line 60 "w.y"
     {printf("//declarations\n");;}
     break;
 
   case 7:
-#line 55 "w.y"
+#line 64 "w.y"
     {
                    if(intab ((yyvsp[(1) - (2)]).thestr))
                          printf("%s is a Double-declared Variable at line %d\n", (yyvsp[(1) - (2)]).thestr, yyloc.first_line);
                    else{
                          addtab((yyvsp[(1) - (2)]).thestr);
                          addtype((yyvsp[(1) - (2)]).thestr, (yyvsp[(2) - (2)]).ttype);
+
+                         if((yyvsp[(2) - (2)]).ttype == 10) 
+                         printf("int %s\n", (yyvsp[(2) - (2)]).thestr);
+                         if((yyvsp[(2) - (2)]).ttype == 20) 
+                         printf("char %s[MAX] \n", (yyvsp[(2) - (2)]).thestr);
                         }
                   ;}
     break;
 
   case 8:
-#line 65 "w.y"
+#line 79 "w.y"
     { if(intab ((yyvsp[(2) - (3)]).thestr)){
                                 printf("%s is a Double-declared Variable at line %d\n", (yyvsp[(1) - (3)]).thestr, yyloc.first_line);
                           }
@@ -1451,87 +1457,98 @@ yyreduce:
                                addtab((yyvsp[(2) - (3)]).thestr);
                                addtype((yyvsp[(2) - (3)]).thestr, (yyvsp[(3) - (3)]).ttype);
                                (yyval).ttype = (yyvsp[(3) - (3)]).ttype;
-                         }
+
+                               if((yyvsp[(3) - (3)]).ttype == 10) 
+                               printf("int %s\n", (yyvsp[(3) - (3)]).thestr);
+                               if((yyvsp[(3) - (3)]).ttype == 20) 
+                               printf("char %s[MAX] \n", (yyvsp[(3) - (3)]).thestr);
+                               }
                          ;}
     break;
 
   case 9:
-#line 74 "w.y"
+#line 93 "w.y"
     {
                            (yyval).ttype = (yyvsp[(2) - (3)]).ttype;
                          ;}
     break;
 
   case 10:
-#line 79 "w.y"
+#line 98 "w.y"
     {(yyval).ttype = 10;;}
     break;
 
   case 11:
-#line 79 "w.y"
+#line 98 "w.y"
     {(yyval).ttype = 20;;}
     break;
 
   case 12:
-#line 84 "w.y"
+#line 105 "w.y"
     {printf("//statements\n");;}
     break;
 
   case 14:
-#line 88 "w.y"
-    {printf("//print string\n"); ;}
+#line 110 "w.y"
+    {
+                printf("//printing");
+                if ( intab((yyvsp[(2) - (2)]).thestr) )
+                   printf("printf(\"%%s\", %s);\n", (yyvsp[(2) - (2)]).thestr);
+                else
+                   printf("UNDECLARED:: %s,(line %d) \n", (yyvsp[(2) - (2)]).thestr, yyloc.first_line);
+              ;}
     break;
 
   case 15:
-#line 90 "w.y"
+#line 119 "w.y"
     {
-                printf("print id\n");
-                if ( intab((yyvsp[(2) - (3)]).thestr) )
-                   printf("%s is declared line %d that\n", (yyvsp[(2) - (3)]).thestr, (yylsp[(2) - (3)]).first_line);
+                printf("//printing\n");
+                if ( intab((yyvsp[(2) - (2)]).thestr) )
+                   printf("printf(\"%%s\", %s);\n", (yyvsp[(2) - (2)]).thestr);
                 else
-                   printf("UNDECLARED:: %s,(line %d) \n", (yyvsp[(2) - (3)]).thestr, yyloc.first_line);
+                   printf("UNDECLARED:: %s,(line %d) \n", (yyvsp[(2) - (2)]).thestr, yyloc.first_line);
               ;}
     break;
 
   case 16:
-#line 98 "w.y"
+#line 128 "w.y"
     {
-                printf("print id\n");
-                if ( intab((yyvsp[(2) - (3)]).thestr) )
-                   printf("%s is declared line %d that\n", (yyvsp[(2) - (3)]).thestr, (yylsp[(2) - (3)]).first_line);
+                printf("//printing\n");
+
+                if ( intab((yyvsp[(2) - (2)]).thestr) )
+                  printf("for(int i = 0; i < strlen( %s ); i++){ printf(\"%%c\\n\", %s[i]);}\n", (yyvsp[(2) - (2)]).thestr, (yyvsp[(2) - (2)]).thestr);
+
                 else
-                   printf("UNDECLARED:: %s,(line %d) \n", (yyvsp[(2) - (3)]).thestr, yyloc.first_line);
+                   printf("UNDECLARED:: %s,(line %d) \n", (yyvsp[(2) - (2)]).thestr, yyloc.first_line);
               ;}
     break;
 
   case 17:
-#line 106 "w.y"
+#line 139 "w.y"
     {
                 printf("assign\n");
-                if ( intab((yyvsp[(1) - (4)]).thestr) )
-                 printf("%s is declared\n", (yyvsp[(1) - (4)]).thestr);
+                if ( intab((yyvsp[(1) - (3)]).thestr) )
+                 printf("%s is declared\n", (yyvsp[(1) - (3)]).thestr);
                 else
-                   printf("UNDECLARED:: %s \n", (yyvsp[(1) - (4)]).thestr);
+                   printf("UNDECLARED:: %s \n", (yyvsp[(1) - (3)]).thestr);
 
-                (yyvsp[(1) - (4)]).ttype = gettype((yyvsp[(1) - (4)]).thestr);
-                if ((yyvsp[(1) - (4)]).ttype > 0 )
+                (yyvsp[(1) - (3)]).ttype = gettype((yyvsp[(1) - (3)]).thestr);
+                if ((yyvsp[(1) - (3)]).ttype > 0 )
                 {
-                  if ((yyvsp[(1) - (4)]).ttype == 20 && (yyvsp[(3) - (4)]).ttype == 10) ;
-                  else if ((yyvsp[(1) - (4)]).ttype == 10 && (yyvsp[(3) - (4)]).ttype == 10) ;
-                  else if ((yyvsp[(1) - (4)]).ttype == 30 && (yyvsp[(3) - (4)]).ttype == 30) ;
-                  else if ((yyvsp[(1) - (4)]).ttype == 20 && (yyvsp[(3) - (4)]).ttype == 20) ;
-                  else printf("Incompatible ASSIGN types %d to %d (line %d)\n",(yyvsp[(3) - (4)]).ttype, (yyvsp[(1) - (4)]).ttype, yyloc.first_line);
+                  if ((yyvsp[(1) - (3)]).ttype == 10 && (yyvsp[(3) - (3)]).ttype == 10) ;
+                  else if ((yyvsp[(1) - (3)]).ttype == 20 && (yyvsp[(3) - (3)]).ttype == 20) ;
+                  else printf("Incompatible ASSIGN types %d to %d (line %d)\n",(yyvsp[(3) - (3)]).ttype, (yyvsp[(1) - (3)]).ttype, yyloc.first_line);
                 }
               ;}
     break;
 
   case 18:
-#line 124 "w.y"
+#line 155 "w.y"
     {printf("ERROR in statement(line %d)\n", yyloc.first_line);;}
     break;
 
   case 19:
-#line 132 "w.y"
+#line 163 "w.y"
     {
                 if ((yyvsp[(1) - (3)]).ttype == 10 && (yyvsp[(3) - (3)]).ttype == 10){
                           (yyval).ttype = 10;
@@ -1550,7 +1567,7 @@ yyreduce:
     break;
 
   case 20:
-#line 147 "w.y"
+#line 178 "w.y"
     {
                if ((yyvsp[(1) - (3)]).ttype == 10 && (yyvsp[(3) - (3)]).ttype == 10){
                           (yyval).ttype = 10;
@@ -1569,12 +1586,12 @@ yyreduce:
     break;
 
   case 21:
-#line 162 "w.y"
+#line 193 "w.y"
     { (yyval).ttype = (yyvsp[(1) - (1)]).ttype; ;}
     break;
 
   case 22:
-#line 166 "w.y"
+#line 197 "w.y"
     {
                if ((yyvsp[(1) - (3)]).ttype == 10 && (yyvsp[(3) - (3)]).ttype == 10){
                           (yyval).ttype = 10;
@@ -1593,7 +1610,7 @@ yyreduce:
     break;
 
   case 23:
-#line 182 "w.y"
+#line 213 "w.y"
     {
                if ((yyvsp[(1) - (3)]).ttype == 10 && (yyvsp[(3) - (3)]).ttype == 10){
                           (yyval).ttype = 20;
@@ -1613,12 +1630,12 @@ yyreduce:
     break;
 
   case 24:
-#line 198 "w.y"
+#line 229 "w.y"
     {(yyval).ttype = (yyvsp[(1) - (1)]).ttype;;}
     break;
 
   case 25:
-#line 201 "w.y"
+#line 232 "w.y"
     {
                 if ( intab((yyvsp[(1) - (1)]).thestr) )
                    printf("%s is declared\n", (yyvsp[(1) - (1)]).thestr);
@@ -1633,23 +1650,23 @@ yyreduce:
     break;
 
   case 26:
-#line 214 "w.y"
+#line 245 "w.y"
     {(yyval).ttype = 20;;}
     break;
 
   case 27:
-#line 215 "w.y"
+#line 246 "w.y"
     {(yyval).ttype = 10;;}
     break;
 
   case 28:
-#line 216 "w.y"
+#line 247 "w.y"
     {(yyval).ttype = (yyvsp[(2) - (3)]).ttype;;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1653 "w.tab.c"
+#line 1670 "w.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1869,16 +1886,14 @@ yyreturn:
 }
 
 
-#line 219 "w.y"
+#line 250 "w.y"
 
 
 
 
 
 int main()
-{
-  yyparse ();
-}
+{ yyparse (); }
 
 
 

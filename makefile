@@ -1,10 +1,11 @@
-go: lex.yy.c symtab.c
-		gcc symtab.c lex.yy.c -lfl -ly -lm -o go
+
+go: lex.yy.c w.tab.c
+		gcc w.tab.c lex.yy.c -lfl -ly -o go
 
 lex.yy.c: w.l
 		flex w.l
 
-symtab.c: w.y
+w.tab.c: w.y
 		bison -dv w.y
 
 clean:

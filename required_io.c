@@ -11,7 +11,7 @@ int main(){
 	char g[MAX]; //instead of the user initializing the string here they have the
 		         //option to initalize it else where. An arbitrary MAX size is 
 		         //defined here. (Let me know what everyone thinks about this)
-
+  
 	y = 11;
 	x = 3 * y;
 	printf("%d\n", x); 
@@ -20,6 +20,7 @@ int main(){
 	                      //this line would be omitted of course if 
 					      //the user decides to initallize the
 					      //string in the header
+
 	printf("%s\n", g);    
 
 	for(int i = 0; i < strlen(g); i++){  //prints the character array

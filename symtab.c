@@ -33,23 +33,19 @@ int intab( char *s)
 }
 
 
-int addtype( char *s, int t)
-{
- int i, loc = -1;
- for ( i = 1; i <= nsym; ++i)
- {
-   if ( strcmp(symtab[i].sname, s) == 0)
-    loc = i;
+int addtype( char *s, int t){
+
+int i, loc = -1;
+
+ for ( i = 1; i <= nsym; ++i) {
+   if ( strcmp(symtab[i].sname, s) == 0) loc = i;
  }
- if (loc > 0)
-  {
-   printf("Set type %s to %d\n", s, t);
-   symtab[loc].stype = t; 
-  }
- else
- {
-   printf("Unable to set type %s to %d\n", s, t);
- } 
+
+   if (loc > 0){
+      printf("Set type %s to %d\n", s, t);
+      symtab[loc].stype = t; 
+    }
+   else{ printf("Unable to set type %s to %d\n", s, t); }
 }
 
 

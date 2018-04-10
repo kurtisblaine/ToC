@@ -8,13 +8,12 @@ typedef struct
  int ttype;
 }tstruct ;
 
-#define YYSTYPE  tstruct
+#define YYSTYPE tstruct
 
 #include "w.tab.h"
-#define YY_USER_ACTION yylloc.first_line = yylloc.last_line = yylineno; \
-    yylloc.first_column = yycolumn; yylloc.last_column = yycolumn + yyleng - 1; \
-    yycolumn += yyleng; \
-    yylval.str = strdup(yytext);
+
+#define YY_USER_ACTION yylloc.first_line = yylloc.last_line = yylineno;
+
 %}
 
 %option yylineno
@@ -31,16 +30,16 @@ START    { return tstart;}
 FINISH   { return tfinish;}
 vari     { return tint;}
 vars	 { return tstr;}
-printi 	 { return tprintint}
-printsh	 { return tprintsrthoriz}
-printsv	 { return tprintstrvert}
-EQ       { return teq;}
+printi 	 { return tprintint;}
+printsh	 { return tprintstrhoriz;}
+printsv	 { return tprintstrvert;}
+"="       { return tassign;}
+
 
 
 \"([^"]*)\"  { return tstrlit;}
 {L}+     { strcpy( yylval.thestr, yytext); return tid; }
 {DIGIT}+ { return tnum; }
-{DIGIT}+"."{DIGIT}{DIGIT} {return tfnum;}
 
 
 @@.*\n   {} /* comments  */   

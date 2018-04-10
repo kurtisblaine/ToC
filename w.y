@@ -19,6 +19,11 @@ void yyerror( char *s );
 
 #include "symtab.c"
 
+
+
+
+
+
 %}
 
 %token tstart
@@ -35,17 +40,21 @@ void yyerror( char *s );
 
 %locations
 
+
+
+
+
+
 %%
 
 p : prog {printf("#include <stdio.h>\n");
           printf("#include <string.h>\n");
+          printf("#define MAX 100\n");
           };
 
 prog : tstart  tfinish
  |  tstart DL SL tfinish  {printf("int main(){\n");}
  ;
-
-
 
 
 DL :  DL D   {printf("//declarations\n");}
@@ -58,6 +67,11 @@ D : tid Dtail    {
                    else{
                          addtab($1.thestr);
                          addtype($1.thestr, $2.ttype);
+
+                         if($2.ttype == 10) 
+                         printf("int %s\n", $2.thestr);
+                         if($2.ttype == 20) 
+                         printf("char %s[MAX] \n", $2.thestr);
                         }
                   }
   ;
@@ -69,7 +83,12 @@ Dtail : ',' tid Dtail    { if(intab ($2.thestr)){
                                addtab($2.thestr);
                                addtype($2.thestr, $3.ttype);
                                $$.ttype = $3.ttype;
-                         }
+
+                               if($3.ttype == 10) 
+                               printf("int %s\n", $3.thestr);
+                               if($3.ttype == 20) 
+                               printf("char %s[MAX] \n", $3.thestr);
+                               }
                          }
       |  type tid ';'    {
                            $$.ttype = $2.ttype;
@@ -81,28 +100,42 @@ type: tint {$$.ttype = 10;} | tstr {$$.ttype = 20;} ;
 
 
 
+
+
 SL :  SL S   {printf("//statements\n");}
   | S        
   ;
 
-S : tprintstrhoriz tstrlit ';'   {printf("//print string\n"); }
-  | tprintstrhoriz tid ';'
+S : tprintstrhoriz tstrlit   
               {
-                printf("print id\n");
+                printf("//printing");
                 if ( intab($2.thestr) )
-                   printf("%s is declared line %d that\n", $2.thestr, @2.first_line);
+                   printf("printf(\"%%s\", %s);\n", $2.thestr);
                 else
                    printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
               }
-  |  tprintstrvert tid ';'
+
+  | tprintstrhoriz tid
               {
-                printf("print id\n");
+                printf("//printing\n");
                 if ( intab($2.thestr) )
-                   printf("%s is declared line %d that\n", $2.thestr, @2.first_line);
+                   printf("printf(\"%%s\", %s);\n", $2.thestr);
                 else
                    printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
               }
-  |  tid tassign expr ';'
+
+  |  tprintstrvert tid
+              {
+                printf("//printing\n");
+
+                if ( intab($2.thestr) )
+                  printf("for(int i = 0; i < strlen( %s ); i++){ printf(\"%%c\\n\", %s[i]);}\n", $2.thestr, $2.thestr);
+
+                else
+                   printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
+              }
+
+  |  tid tassign expr
               {
                 printf("assign\n");
                 if ( intab($1.thestr) )
@@ -113,9 +146,7 @@ S : tprintstrhoriz tstrlit ';'   {printf("//print string\n"); }
                 $1.ttype = gettype($1.thestr);
                 if ($1.ttype > 0 )
                 {
-                  if ($1.ttype == 20 && $3.ttype == 10) ;
-                  else if ($1.ttype == 10 && $3.ttype == 10) ;
-                  else if ($1.ttype == 30 && $3.ttype == 30) ;
+                  if ($1.ttype == 10 && $3.ttype == 10) ;
                   else if ($1.ttype == 20 && $3.ttype == 20) ;
                   else printf("Incompatible ASSIGN types %d to %d (line %d)\n",$3.ttype, $1.ttype, yyloc.first_line);
                 }
@@ -218,10 +249,11 @@ factor : tid
 
 %%
 
+
+
+
 int main()
-{
-  yyparse ();
-}
+{ yyparse (); }
 
 
 
