@@ -94,10 +94,10 @@ DL : DL D       { sprintf($$.str, "%s%s", $1.str, $2.str);      }
 D: type ' ' ID  '\n'
 	{ if( $3.ttype == 10 ) 
 			printf(" int %s ;\n", $3.str);
- 	  else if ( $3.ttype == 20 } 
+ 	  else if ( $3.ttype == 20 ) 
 			printf(" char s[80] ;\n", $3.str);
 	  else 
-			printf("ERROR - illegal type for %s.\n", $3.type);
+			printf("ERROR - illegal type for %s.\n", $3.type); }
  ;
 
 type: VARI     { $$.ttype = 10; }
