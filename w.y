@@ -37,7 +37,7 @@ void yyerror( char *s );
 %token tnum
 %token tfnum
 
-%define locations
+%locations
 
 %%
 
