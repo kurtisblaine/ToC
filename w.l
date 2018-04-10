@@ -26,11 +26,9 @@ L      [A-Za-z]
 
 %%
 
-START    { return tstart;}
-FINISH   { return tfinish;}
 vari     { return tint;}
 vars	 { return tstr;}
-printi 	 { return tprintint;}
+printi 	 { return tprinti;}
 printsh	 { return tprintstrhoriz;}
 printsv	 { return tprintstrvert;}
 "="       { return tassign;}

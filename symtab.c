@@ -33,7 +33,7 @@ int intab( char *s)
 }
 
 
-int addtype( char *s, int t){
+ void addtype( char *s, int t){
 
 int i, loc = -1;
 
@@ -45,7 +45,7 @@ int i, loc = -1;
       printf("Set type %s to %d\n", s, t);
       symtab[loc].stype = t; 
     }
-   else{ printf("Unable to set type %s to %d\n", s, t); }
+   else printf("Unable to set type %s to %d\n", s, t); 
 }
 
 
@@ -73,5 +73,8 @@ int gettype( char *s)
  return t;
 }
 
-
+void exitNow(){
+  printf("Error: Build Canceled\n");
+  exit(1);
+}
 
