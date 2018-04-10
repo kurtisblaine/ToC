@@ -71,7 +71,7 @@ D : type tid Dtail {
                          addtab($1.thestr);
                          addtype($1.thestr, $2.ttype);
 
-                         sprintf($$.thestr, "%s %s;\n", $1.thestr $2.thestr);
+                         sprintf($$.thestr, "%s %s;\n", $1.thestr, $2.thestr);
                         }
                   }
 
