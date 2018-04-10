@@ -46,7 +46,7 @@ p : prog {printf("#include <stdio.h>\n");
           };
 
 prog : tstart  tfinish
- |  tstart DL SL tfinish  {printf("int main(){\n");}
+ |  tstart DL tstrlit tfinish  {printf("int main(){\n");}
  ;
 
 DL :  DL D   {printf("//declarations\n");}
@@ -77,7 +77,7 @@ Dtail : tid Dtail ';'   { if(intab ($2.thestr)){
                          }
       ;
 
-DL :  SL  END
+DL :  tstrlit  tend
  {
    printf("//------------- START\n\n");
    printf("%s", $2.str);
@@ -91,7 +91,7 @@ DL : DL D       { sprintf($$.str, "%s%s", $1.str, $2.str);      }
    | D          { sprintf($$.str, "%s", $1.str);                }
    ;
 
-D: type ' ' ID  '\n'
+D: type ' ' tid  '\n'
 	{ if( $3.ttype == 10 ) 
 			printf(" int %s ;\n", $3.str);
  	  else if ( $3.ttype == 20 ) 
@@ -100,8 +100,8 @@ D: type ' ' ID  '\n'
 			printf("ERROR - illegal type for %s.\n", $3.type); }
  ;
 
-type: VARI     { $$.ttype = 10; }
-    | VARS     { $$.ttype = 20; } 
+type: tint     { $$.ttype = 10; }
+    | tstr     { $$.ttype = 20; } 
     ;
 
 
