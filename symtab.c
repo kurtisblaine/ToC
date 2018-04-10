@@ -46,6 +46,9 @@ int i, loc = -1;
       symtab[loc].stype = t; 
     }
    else printf("Unable to set type %s to %d\n", s, t); 
+
+ return 0;
+
 }
 
 
