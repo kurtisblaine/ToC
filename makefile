@@ -13,3 +13,4 @@ clean:
 		rm -f w.output
 		rm -f w.tab.h
 		rm -f w.tab.c
+		rm -f go
