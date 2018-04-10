@@ -1,5 +1,5 @@
 
-
+/* test comment */
 
 struct stelem
 {
