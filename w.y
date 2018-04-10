@@ -58,12 +58,12 @@ prog: DL SL
  ;
 
 
-DL :  DL D   {printf("//declarations\n");}
-  | D        
+DL :  DL D   { sprintf($$.thestr, "%s%s", $1.thestr, $2.thestr);}
+  | D        { sprintf($$.thestr, "%s", $1.thestr);             }
   ;
 
-D : tid Dtail    {
-                   if(intab ($1.thestr)){
+D : type tid Dtail {
+                   if(intab ($2.thestr)){
                          printf("%s is a Double-declared Variable at line %d\n", $1.thestr, yyloc.first_line);
                          exitNow();
                         }
@@ -71,12 +71,33 @@ D : tid Dtail    {
                          addtab($1.thestr);
                          addtype($1.thestr, $2.ttype);
 
-                         if($2.ttype == 10) 
-                         printf("int %s\n", $2.thestr);
-                         if($2.ttype == 20) 
-                         printf("char %s[MAX] \n", $2.thestr);
+                         sprintf($$.thestr, "%s %s;\n", $1.thestr $2.thestr);
                         }
                   }
+
+  |  tid tassign expr
+          {
+                printf("//assign\n");
+                if ( !intab($1.thestr) ){
+                     printf("UNDECLARED:: %s \n", $1.thestr);
+                     exitNow();
+                }
+
+                else{
+                  $1.ttype = gettype($1.thestr);
+                  if ($1.ttype > 0 )
+                  {
+                    if (($1.ttype == 10 && $3.ttype == 10) || ($1.ttype == 20 && $3.ttype == 20)){
+                        sprintf($$.thestr, "%s = %s;\n", $1.thestr, $3.thestr);
+                    } 
+  
+                    else {
+                     printf("Incompatible ASSIGN types %d to %d (line %d)\n",$3.ttype, $1.ttype, yyloc.first_line);
+                     exitNow();
+                    }
+                  }
+                  }
+            }
   ;
 
 Dtail : ',' tid Dtail    { if(intab ($2.thestr)){
@@ -94,12 +115,12 @@ Dtail : ',' tid Dtail    { if(intab ($2.thestr)){
                                printf("char %s[MAX] \n", $3.thestr);
                                }
                          }
-      |  type tid ';'    {
+      |  type tid       {
                            $$.ttype = $2.ttype;
                          }
       ;
 
-type: tint {$$.ttype = 10;} | tstr {$$.ttype = 20;} ;
+type: tint {$$.ttype = 10; strcpy($$.thestr, "int ");} | tstr {$$.ttype = 20; strcpy($$.thestr, "char ");} ;
 
 
 
@@ -146,32 +167,6 @@ S : tprintstrhoriz tstrlit
                    printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
                    exitNow();
               }
-
-  |  tid tassign expr
-          {
-                printf("//assign\n");
-                if ( !intab($1.thestr) ){
-                     printf("UNDECLARED:: %s \n", $1.thestr);
-                     exitNow();
-                }
-
-                else{
-                  $1.ttype = gettype($1.thestr);
-                  if ($1.ttype > 0 )
-                  {
-                    if (($1.ttype == 10 && $3.ttype == 10) || ($1.ttype == 20 && $3.ttype == 20)){
-                        sprintf($$.thestr, "%s = %s;\n", $1.thestr, $3.thestr);
-                    } 
-  
-                    else {
-                     printf("Incompatible ASSIGN types %d to %d (line %d)\n",$3.ttype, $1.ttype, yyloc.first_line);
-                     exitNow();
-                    }
-                  }
-                  }
-            }
-            
-
   | error ';' {
                 printf("ERROR in statement(line %d)\n", yyloc.first_line);
                 exitNow();
@@ -239,6 +234,9 @@ factor : tid
                   }
   | tnum         { $$.ttype = 10;
                    strcpy($$.thestr, $1.thestr);
+                  }
+  | tstrlit       { $$.ttype = 20;
+                    strcpy($$.thestr, $1.thestr);
                   }
   | '(' expr ')' { $$.ttype = $2.ttype;
                    sprintf($$.thestr, "( %s )\n", $2.thestr);
