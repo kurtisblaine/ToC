@@ -29,13 +29,11 @@ L      [A-Za-z]
 
 START    { return tstart;}
 FINISH   { return tfinish;}
-BEGIN    { return tbegin;}
-END      { return tend;}
 vari     { return tint;}
 vars	 { return tstr;}
 printi 	 { return tprintint}
 printsh	 { return tprintsrthoriz}
-printv	 { return tprintstrvert}
+printsv	 { return tprintstrvert}
 EQ       { return teq;}
 
 

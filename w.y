@@ -19,23 +19,19 @@ void yyerror( char *s );
 
 #include "symtab.c"
 
-
 %}
 
 %token tstart
 %token tfinish
-%token tbegin
-%token tend
 %token tint
 %token tstr
 %token tprintint
-%token tprintsrthoriz
+%token tprintstrhoriz
 %token tprintstrvert
-%token teq
+%token tassign
 %token tstrlit
 %token tid
 %token tnum
-%token tfnum
 
 %locations
 
@@ -46,8 +42,11 @@ p : prog {printf("#include <stdio.h>\n");
           };
 
 prog : tstart  tfinish
- |  tstart DL tstrlit tfinish  {printf("int main(){\n");}
+ |  tstart DL SL tfinish  {printf("int main(){\n");}
  ;
+
+
+
 
 DL :  DL D   {printf("//declarations\n");}
   | D        
@@ -63,7 +62,7 @@ D : tid Dtail    {
                   }
   ;
 
-Dtail : tid Dtail ';'   { if(intab ($2.thestr)){
+Dtail : ',' tid Dtail    { if(intab ($2.thestr)){
                                 printf("%s is a Double-declared Variable at line %d\n", $1.thestr, yyloc.first_line);
                           }
                           else{
@@ -72,38 +71,157 @@ Dtail : tid Dtail ';'   { if(intab ($2.thestr)){
                                $$.ttype = $3.ttype;
                          }
                          }
-      |  ':' type ';'    {
+      |  type tid ';'    {
                            $$.ttype = $2.ttype;
                          }
       ;
 
-DL :  tstrlit  tend
- {
-   printf("//------------- START\n\n");
-   printf("%s", $2.str);
-   printf("%s", $3.str);
-   printf("\n");
-   printf("//------------- FINISH\n");
-       }
-       ;
+type: tint {$$.ttype = 10;} | tstr {$$.ttype = 20;} ;
 
-DL : DL D       { sprintf($$.str, "%s%s", $1.str, $2.str);      }
-   | D          { sprintf($$.str, "%s", $1.str);                }
-   ;
 
-D: type ' ' tid  '\n'
-	{ if( $3.ttype == 10 ) 
-			printf(" int %s ;\n", $3.str);
- 	  else if ( $3.ttype == 20 ) 
-			printf(" char s[80] ;\n", $3.str);
-	  else 
-			printf("ERROR - illegal type for %s.\n", $3.type); }
- ;
 
-type: tint     { $$.ttype = 10; }
-    | tstr     { $$.ttype = 20; } 
-    ;
 
+SL :  SL S   {printf("//statements\n");}
+  | S        
+  ;
+
+S : tprintstrhoriz tstrlit ';'   {printf("//print string\n"); }
+  | tprintstrhoriz tid ';'
+              {
+                printf("print id\n");
+                if ( intab($2.thestr) )
+                   printf("%s is declared line %d that\n", $2.thestr, @2.first_line);
+                else
+                   printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
+              }
+  |  tprintstrvert tid ';'
+              {
+                printf("print id\n");
+                if ( intab($2.thestr) )
+                   printf("%s is declared line %d that\n", $2.thestr, @2.first_line);
+                else
+                   printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
+              }
+  |  tid tassign expr ';'
+              {
+                printf("assign\n");
+                if ( intab($1.thestr) )
+                 printf("%s is declared\n", $1.thestr);
+                else
+                   printf("UNDECLARED:: %s \n", $1.thestr);
+
+                $1.ttype = gettype($1.thestr);
+                if ($1.ttype > 0 )
+                {
+                  if ($1.ttype == 20 && $3.ttype == 10) ;
+                  else if ($1.ttype == 10 && $3.ttype == 10) ;
+                  else if ($1.ttype == 30 && $3.ttype == 30) ;
+                  else if ($1.ttype == 20 && $3.ttype == 20) ;
+                  else printf("Incompatible ASSIGN types %d to %d (line %d)\n",$3.ttype, $1.ttype, yyloc.first_line);
+                }
+              }
+
+  | error ';' {printf("ERROR in statement(line %d)\n", yyloc.first_line);}
+  ;
+
+
+
+
+
+expr : expr '+' term
+             {
+                if ($1.ttype == 10 && $3.ttype == 10){
+                          $$.ttype = 10;
+                }
+               else if ($1.ttype == 20 && $3.ttype == 20) {
+                           $$.ttype = 20;
+                }
+               else if ($1.ttype == 20 && $3.ttype == 10){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 10 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+               else $$.ttype = -1;
+             }
+| expr '-' term {
+               if ($1.ttype == 10 && $3.ttype == 10){
+                          $$.ttype = 10;
+                        }
+                else if ($1.ttype == 20 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 20 && $3.ttype == 10){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 10 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+                else $$.ttype = -1;
+             }
+  |  term      { $$.ttype = $1.ttype; }
+  ;
+
+term : term '*' factor
+             {
+               if ($1.ttype == 10 && $3.ttype == 10){
+                          $$.ttype = 10;
+                }
+               else if ($1.ttype == 20 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+                else if ($1.ttype == 20 && $3.ttype == 10){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 10 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+               else $$.ttype = -1;
+             }
+
+ | term '/' factor {
+               if ($1.ttype == 10 && $3.ttype == 10){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 20 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+                else if ($1.ttype == 20 && $3.ttype == 10){
+                          $$.ttype = 20;
+                }
+               else if ($1.ttype == 10 && $3.ttype == 20){
+                          $$.ttype = 20;
+                }
+
+               else $$.ttype = -1;
+             }
+  | factor       {$$.ttype = $1.ttype;}
+
+factor : tid
+              {
+                if ( intab($1.thestr) )
+                   printf("%s is declared\n", $1.thestr);
+                else
+                   printf("UNDECLARED:: %s \n", $1.thestr);
+                $$.ttype = gettype($1.thestr);
+                if ($$.ttype > 0 )
+                      ;
+                else
+                        yyerror("Type ERROR:::");
+              }
+
+
+  | tstr         {$$.ttype = 20;}
+  | tnum         {$$.ttype = 10;}
+  | '(' expr ')' {$$.ttype = $2.ttype;}
+  ;
+
+%%
+
+int main()
+{
+  yyparse ();
+}
 
 
 

@@ -20,13 +20,6 @@ void addtab( char *s)
  symtab[nsym].stype = -1;
 }
 
-void showtab()
-{
- int i;
- for (i = 1; i <= nsym; ++i)
-   printf("%d: %s %d\n", i, symtab[i].sname, symtab[i].stype);
-}
-
 int intab( char *s)
 {
  int i;
