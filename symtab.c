@@ -40,19 +40,6 @@ int intab( char *s)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 int addtype( char *s, int t)
 {
  int i, loc = -1;

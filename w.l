@@ -35,6 +35,7 @@ printsh	 { return tprintsrthoriz}
 printv	 { return tprintstrvert}
 EQ       { return teq;}
 
+
 \"([^"]*)\"  { return tstrlit;}
 {L}+     { strcpy( yylval.thestr, yytext); return tid; }
 {DIGIT}+ { return tnum; }
