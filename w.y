@@ -67,8 +67,8 @@ D : type tid  {
                          exitNow();
                         }
                    else{
-                         addtab($1.thestr);
-                         addtype($1.thestr, $2.ttype);
+                         addtab($2.thestr);
+                         addtype($2.thestr, $1.ttype);
 
                          printf( "%s %s;\n", $1.thestr, $2.thestr);
                         }
@@ -142,7 +142,7 @@ S : tprintstrhoriz tstrlit
                    printf("UNDECLARED:: %s,(line %d) \n", $2.thestr, yyloc.first_line);
                    exitNow();
               }
-  tid tassign expr
+  | tid tassign expr
           {
                 printf("//assign\n");
                 if ( !intab($1.thestr) ){
