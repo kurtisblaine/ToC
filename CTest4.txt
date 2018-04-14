@@ -1,7 +1,0 @@
-vari a
-vari b
-vari c
-
-a = 2
-b = 1
-c = a + b

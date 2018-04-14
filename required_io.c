@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 100   //Maybe a greater/lesser value defined here    
-
 int main(){
 	
 	int x;
@@ -26,6 +24,8 @@ int main(){
 	for(int i = 0; i < strlen(g); i++){  //prints the character array
 		printf("%c\n", g[i]);            //vertically
 	}
+
+return 0;
 
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~target language~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,5 +1,0 @@
-vari a
-vars b
-
-a = "hello"
-b = "world"

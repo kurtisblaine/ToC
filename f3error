@@ -1,0 +1,15 @@
+vari x
+vari num
+vari num2
+vars string
+
+num2 = 5
+x = 2 * (11-1)
+num = x + num2
+
+printi num
+
+string = "This string is to be printed horizontally"
+string2 = "This string is to be printed vertically"
+printsh string
+printsv string2

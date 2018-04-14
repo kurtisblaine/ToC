@@ -1,0 +1,5 @@
+vars y
+
+y = "THeString"
+
+printi y

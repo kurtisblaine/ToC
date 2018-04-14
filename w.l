@@ -3,8 +3,7 @@
 
 typedef struct
 {
- char thestr[25];
- int ival;
+ char thestr[100];
  int ttype;
 }tstruct ;
 
@@ -20,8 +19,6 @@ typedef struct
 
 
 DIGIT  [0-9]
-UC     [A-Z]
-LC     [a-z]
 L      [A-Za-z]
 
 %%
@@ -29,15 +26,15 @@ L      [A-Za-z]
 vari     { return tint;}
 vars	 { return tstr;}
 printi 	 { return tprinti;}
-printsh	 { return tprintstrhoriz;}
-printsv	 { return tprintstrvert;}
-"="       { return tassign;}
+printsh	 { return tprintsh;}
+printsv	 { return tprintsv;}
+"="      { return tassign;}
 
 
 
-\"([^"]*)\"  { return tstrlit;}
-{L}+     { strcpy( yylval.thestr, yytext); return tid; }
-{DIGIT}+ { return tnum; }
+\"([^"]*)\"          { strcpy( yylval.thestr, yytext); return tstrlit;}
+{L}+{DIGIT}*         { strcpy( yylval.thestr, yytext); return tid; }
+{DIGIT}+             { strcpy( yylval.thestr, yytext); return tnum; }
 
 
 @@.*\n   {} /* comments  */   
@@ -56,7 +53,6 @@ printsv	 { return tprintstrvert;}
 
 void yyerror(char *s)  /* Called by yyparse on error */
 {
-  printf ("\terror: %s\n", s);
   printf ("ERROR: %s at line %d\n", s, yylineno);
 }
 

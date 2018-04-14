@@ -42,11 +42,9 @@ int i, loc = -1;
  }
 
    if (loc > 0){
-      printf("Set type %s to %d\n", s, t);
       symtab[loc].stype = t; 
     }
    else printf("Unable to set type %s to %d\n", s, t); 
-
 }
 
 
@@ -62,20 +60,17 @@ int gettype( char *s)
  if (loc > 0)
   {
    t = symtab[loc].stype;
-   printf("Get type for %s to %d\n", s, t);
   }
  if (loc <= 0)
    printf("gettype var %s not found\n", s);
  else if (t < 0)
    printf("gettype var %s has bad type %d\n", s, t);
- else 
-   printf("gettype var %s has type %d\n", s, t);
+ else ;
    
  return t;
 }
 
 void exitNow(){
-  printf("Error: Build Canceled\n");
+  printf("Canceling...\n");
   exit(1);
 }
-

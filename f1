@@ -1,0 +1,22 @@
+	   vari x
+	   vari y
+	   vari z
+	   vars g 
+	   vars h
+	
+	   y = 211
+	   x = 2 + 4 * 2
+	   z = y / 11
+
+	   printi x
+	   printi y
+	   printi z
+		
+	   h = "Declaring string down here"
+	   g = "writing text vertically and horizontally"	   
+
+	   printsh g
+	   printsv g
+
+	   printsh h
+           printsv h

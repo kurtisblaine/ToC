@@ -1,6 +1,6 @@
 
 go: lex.yy.c w.tab.c
-		gcc w.tab.c lex.yy.c -lfl -ly -o go
+		gcc w.tab.c lex.yy.c -ll -ly -o go
 
 lex.yy.c: w.l
 		flex w.l

@@ -1,0 +1,9 @@
+vari integer1
+vari integer
+vars string
+
+string = "REALLY COOL STRING"
+integer1 = 52 - 2 * 1 / 5
+integer = 1 + integer1
+printi integer
+printsv string 
